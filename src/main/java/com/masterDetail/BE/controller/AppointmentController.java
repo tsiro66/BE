@@ -3,6 +3,8 @@ package com.masterDetail.BE.controller;
 import com.masterDetail.BE.model.Appointment;
 import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.AppointmentService;
+import com.masterDetail.BE.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +13,11 @@ import java.util.List;
 @RequestMapping("/appointment")
 public class AppointmentController {
 
+    @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    PatientService patientService;
 
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
@@ -28,7 +34,9 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public String createAppointmentDetails(@RequestBody Appointment appointment) {
+    public String createAppointmentDetails(@RequestParam String patientId,@RequestBody Appointment appointment) {
+        Patient patient = patientService.getPatient(patientId);
+        appointment.setPatient(patient);
         appointmentService.createAppointment(appointment);
         return "Appointment Created Successfully!";
     }

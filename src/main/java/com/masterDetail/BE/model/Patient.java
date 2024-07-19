@@ -1,10 +1,13 @@
 package com.masterDetail.BE.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "patient")
@@ -16,18 +19,21 @@ public class Patient {
     private String lastName;
     private LocalDate dob;
     private String gender;
-
+    @OneToMany(mappedBy = "patient")
+    @JsonManagedReference //Remove cyclic references in JSON responses
+    private List<Appointment> appointments;
 
 
     public Patient() {
     }
 
-    public Patient(String patientId, String firstName, String lastName, LocalDate dob, String gender) {
+    public Patient(String patientId, String firstName, String lastName, LocalDate dob, String gender, List<Appointment> appointments) {
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
+        this.appointments = appointments;
     }
 
     public String getPatientId() {
@@ -62,4 +68,11 @@ public class Patient {
 
     public void setGender(String gender) { this.gender = gender; }
 
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 }

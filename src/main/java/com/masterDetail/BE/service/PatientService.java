@@ -1,6 +1,8 @@
 package com.masterDetail.BE.service;
 
 import com.masterDetail.BE.model.Patient;
+import com.masterDetail.BE.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

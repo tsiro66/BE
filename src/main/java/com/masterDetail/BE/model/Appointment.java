@@ -1,7 +1,9 @@
 package com.masterDetail.BE.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +15,7 @@ public class Appointment {
     private String appointmentId;
     @ManyToOne
     @JoinColumn(name = "patientId", nullable = false)
+    @JsonBackReference //Remove cyclic references in JSON responses
     private Patient patient;
     private LocalDateTime appointmentDateTime;
     private String description;
@@ -35,12 +38,18 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
+    @JsonIgnore
     public Patient getPatient() {
         return patient;
     }
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    @JsonProperty("patientId")
+    public String patientId() {
+        return patient !=null ? patient.getPatientId() : null;
     }
 
     public LocalDateTime getAppointmentDateTime() {
