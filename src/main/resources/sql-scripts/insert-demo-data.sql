@@ -11,5 +11,4 @@ INSERT INTO appointment (appointment_id, patient_id, appointment_date_time, desc
 ('3', '3', '2024-07-18T12:00:00', 'Consultation for skin rash treatment');
 
 -- Insert demo data into user table
-INSERT INTO user (username, password, role) VALUES ('user', '$2a$10$7QJZ2N5qKjD/MZrE5XDAI.vkexGzHBuNcbbwrZ1gE8OXpeJqJDzFu', 'USER');  -- password is "password"
-INSERT INTO user (username, password, role) VALUES ('admin', '$2a$10$eW5sGx2ci3pYuFwRE/hAe.6ZMLQDj.Z3VQzRP2EXCNbkGz9as.zxK', 'ADMIN'); -- password is "adminpass"
+INSERT INTO user (username, password) VALUES ('user', '$2a$10$7QJZ2N5qKjD/MZrE5XDAI.vkexGzHBuNcbbwrZ1gE8OXpeJqJDzFu');  -- password is "password"

@@ -5,10 +5,15 @@ import com.masterDetail.BE.service.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
@@ -20,10 +25,10 @@ public class AuthController {
     }
 
     @PostMapping("/token")
-    public String token(Authentication authentication) {
+    public Map<String, String> token(Authentication authentication) {
         log.debug("Token requested for user: '{}'", authentication.getName());
         String token = tokenService.generateToken(authentication);
         log.debug("Token granted {}", token);
-        return token;
+        return Collections.singletonMap("token", token);
     }
 }

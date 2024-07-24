@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost")
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -34,8 +35,9 @@ public class PatientController {
         return "Patient Created Successfully!";
     }
 
-    @PutMapping
-    public String updatePatientDetails(@RequestBody Patient patient) {
+    @PutMapping("/{patientId}")
+    public String updatePatientDetails(@PathVariable("patientId") String patientId, @RequestBody Patient patient) {
+        patient.setPatientId(patientId);
         patientService.updatePatient(patient);
         return "Patient Updated Successfully!";
     }
