@@ -16,14 +16,10 @@ CREATE TABLE appointment (
     FOREIGN KEY (patient_id) REFERENCES patient(patient_id)
 );
 
--- Script to create user table
--- Create an ENUM type for roles
-CREATE TYPE user_role AS ENUM ('USER', 'ADMIN');
 
 -- Create the User table
 CREATE TABLE "User" (
     "UserId" SERIAL PRIMARY KEY,       -- Auto-incrementing integer
     "username" VARCHAR(255) NOT NULL UNIQUE,
     "password" VARCHAR(255) NOT NULL,
-    "role" user_role NOT NULL
 );

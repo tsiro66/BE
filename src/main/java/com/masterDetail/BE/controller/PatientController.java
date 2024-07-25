@@ -2,13 +2,14 @@ package com.masterDetail.BE.controller;
 
 import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.PatientService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -42,9 +43,9 @@ public class PatientController {
         return "Patient Updated Successfully!";
     }
 
-    @DeleteMapping("{patientId}")
-    public String deletePatientDetails(@PathVariable("patientId") String patientId) {
+    @DeleteMapping("/{patientId}")
+    public ResponseEntity<Void> deletePatientDetails(@PathVariable("patientId") String patientId) {
         patientService.deletePatient(patientId);
-        return "Patient Deleted Successfully!";
+        return ResponseEntity.noContent().build();
     }
 }

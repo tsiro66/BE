@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "appointment")
@@ -17,16 +17,16 @@ public class Appointment {
     @JoinColumn(name = "patientId", nullable = false)
     @JsonBackReference //Remove cyclic references in JSON responses
     private Patient patient;
-    private LocalDateTime appointmentDateTime;
+    private LocalDate appointmentDate;
     private String description;
 
     public Appointment() {
     }
 
-    public Appointment(String appointmentId, Patient patient, LocalDateTime appointmentDateTime, String description) {
+    public Appointment(String appointmentId, Patient patient, LocalDate appointmentDate, String description) {
         this.appointmentId = appointmentId;
         this.patient = patient;
-        this.appointmentDateTime = appointmentDateTime;
+        this.appointmentDate = appointmentDate;
         this.description = description;
     }
 
@@ -52,12 +52,12 @@ public class Appointment {
         return patient !=null ? patient.getPatientId() : null;
     }
 
-    public LocalDateTime getAppointmentDateTime() {
-        return appointmentDateTime;
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
-        this.appointmentDateTime = appointmentDateTime;
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public String getDescription() {

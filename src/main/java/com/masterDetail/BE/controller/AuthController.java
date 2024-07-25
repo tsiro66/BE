@@ -4,8 +4,11 @@ package com.masterDetail.BE.controller;
 import com.masterDetail.BE.service.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,4 +34,14 @@ public class AuthController {
         log.debug("Token granted {}", token);
         return Collections.singletonMap("token", token);
     }
+
+    @GetMapping("/validate-token")
+    public ResponseEntity<Void> validateToken(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
 }

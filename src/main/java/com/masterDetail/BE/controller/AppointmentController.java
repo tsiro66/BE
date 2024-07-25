@@ -1,5 +1,6 @@
 package com.masterDetail.BE.controller;
 
+import com.masterDetail.BE.dto.AppointmentUpdateDTO;
 import com.masterDetail.BE.model.Appointment;
 import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.AppointmentService;
@@ -41,8 +42,17 @@ public class AppointmentController {
         return "Appointment Created Successfully!";
     }
 
-    @PutMapping
-    public String updateAppointmentDetails(@RequestBody Appointment appointment) {
+    @PutMapping("/{appointmentId}")
+    public String updateAppointmentDetails(@PathVariable("appointmentId") String appointmentId, @RequestBody AppointmentUpdateDTO appointmentUpdateDTO) {
+        Appointment appointment = new Appointment();
+        appointment.setAppointmentId(appointmentId);
+        appointment.setAppointmentDate(appointmentUpdateDTO.getAppointmentDate());
+        appointment.setDescription(appointmentUpdateDTO.getDescription());
+
+        Patient patient = new Patient();
+        patient.setPatientId(appointmentUpdateDTO.getPatientId());
+        appointment.setPatient(patient);
+
         appointmentService.updateAppointment(appointment);
         return "Appointment Updated Successfully!";
     }
