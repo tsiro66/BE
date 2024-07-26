@@ -34,8 +34,8 @@ public class AppointmentController {
         return appointmentService.getAllAppointments();
     }
 
-    @PostMapping
-    public String createAppointmentDetails(@RequestParam String patientId,@RequestBody Appointment appointment) {
+    @PostMapping("/{patientId}")
+    public String createAppointmentDetails(@PathVariable ("patientId")String patientId,@RequestBody Appointment appointment) {
         Patient patient = patientService.getPatient(patientId);
         appointment.setPatient(patient);
         appointmentService.createAppointment(appointment);
