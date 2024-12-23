@@ -2,7 +2,9 @@ package com.masterDetail.BE.controller;
 
 import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -16,12 +18,13 @@ public class PatientController {
 
     PatientService patientService;
 
+    @Autowired
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
 
     @GetMapping("{patientId}")
-    public Patient getPatientDetails(@PathVariable("patientId") String patientId) {
+    public Patient getPatientDetails(@PathVariable("patientId") Long patientId) {
         return patientService.getPatient(patientId);
     }
 
@@ -37,14 +40,15 @@ public class PatientController {
     }
 
     @PutMapping("/{patientId}")
-    public String updatePatientDetails(@PathVariable("patientId") String patientId, @RequestBody Patient patient) {
+    @Transactional
+    public String updatePatientDetails(@PathVariable("patientId") Long patientId, @RequestBody Patient patient) {
         patient.setPatientId(patientId);
         patientService.updatePatient(patient);
         return "Patient Updated Successfully!";
     }
 
     @DeleteMapping("/{patientId}")
-    public ResponseEntity<Void> deletePatientDetails(@PathVariable("patientId") String patientId) {
+    public ResponseEntity<Void> deletePatientDetails(@PathVariable("patientId") Long patientId) {
         patientService.deletePatient(patientId);
         return ResponseEntity.noContent().build();
     }

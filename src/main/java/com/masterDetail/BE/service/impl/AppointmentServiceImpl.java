@@ -31,13 +31,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public String deleteAppointment(String appointmentId) {
+    public String deleteAppointment(Long appointmentId) {
         appointmentRepository.deleteById(appointmentId);
         return "Success";
     }
 
     @Override
-    public Appointment getAppointment(String appointmentId) {
+    public Appointment getAppointment(Long appointmentId) {
         return appointmentRepository.findById(appointmentId).get();
     }
 

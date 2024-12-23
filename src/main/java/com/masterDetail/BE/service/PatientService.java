@@ -9,8 +9,8 @@ import java.util.List;
 public interface PatientService {
     public String createPatient(Patient patient);
     public String updatePatient(Patient patient);
-    public String deletePatient(String patientId);
-    public Patient getPatient(String patientId);
+    public String deletePatient(Long patientId);
+    public Patient getPatient(Long patientId);
     public List<Patient> getAllPatients();
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,20 +12,21 @@ import java.util.List;
 public class Patient {
 
     @Id
-    private String patientId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long patientId;
     private String firstName;
     private String lastName;
     private LocalDate dob;
     private String gender;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference //Remove cyclic references in JSON responses
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
 
 
     public Patient() {
     }
 
-    public Patient(String patientId, String firstName, String lastName, LocalDate dob, String gender, List<Appointment> appointments) {
+    public Patient(Long patientId, String firstName, String lastName, LocalDate dob, String gender, List<Appointment> appointments) {
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,11 +35,11 @@ public class Patient {
         this.appointments = appointments;
     }
 
-    public String getPatientId() {
+    public Long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 

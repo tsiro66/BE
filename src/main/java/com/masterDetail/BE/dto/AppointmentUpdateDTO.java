@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 
 public class AppointmentUpdateDTO {
-    private String patientId;
+    private Long patientId;
     private LocalDate appointmentDate;
     private String description;
 
-    public String getPatientId() {
+    public Long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 

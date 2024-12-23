@@ -30,6 +30,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public String updatePatient(Patient patient) {
+        System.out.println("Updating patient with ID: " + patient.getPatientId());
         if (!patientRepository.existsById(patient.getPatientId())) {
             throw new EntityNotFoundException("Patient not found with id: " + patient.getPatientId());
         }
@@ -38,13 +39,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public String deletePatient(String patientId) {
+    public String deletePatient(Long patientId) {
         patientRepository.deleteById(patientId);
         return "Success";
     }
 
     @Override
-    public Patient getPatient(String patientId) {
+    public Patient getPatient(Long patientId) {
         return patientRepository.findById(patientId).get();
     }
 

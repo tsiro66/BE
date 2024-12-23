@@ -12,7 +12,8 @@ import java.time.LocalDate;
 public class Appointment {
 
     @Id
-    private String appointmentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long appointmentId;
     @ManyToOne
     @JoinColumn(name = "patientId", nullable = false)
     @JsonBackReference //Remove cyclic references in JSON responses
@@ -23,18 +24,18 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(String appointmentId, Patient patient, LocalDate appointmentDate, String description) {
+    public Appointment(Long appointmentId, Patient patient, LocalDate appointmentDate, String description) {
         this.appointmentId = appointmentId;
         this.patient = patient;
         this.appointmentDate = appointmentDate;
         this.description = description;
     }
 
-    public String getAppointmentId() {
+    public Long getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(String appointmentId) {
+    public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
     }
 
@@ -48,7 +49,7 @@ public class Appointment {
     }
 
     @JsonProperty("patientId")
-    public String patientId() {
+    public Long patientId() {
         return patient !=null ? patient.getPatientId() : null;
     }
 

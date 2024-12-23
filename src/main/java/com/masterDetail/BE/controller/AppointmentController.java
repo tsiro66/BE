@@ -20,12 +20,13 @@ public class AppointmentController {
     @Autowired
     PatientService patientService;
 
+    @Autowired
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
 
     @GetMapping("{appointmentId}")
-    public Appointment getAppointmentDetails(@PathVariable("appointmentId") String appointmentId) {
+    public Appointment getAppointmentDetails(@PathVariable("appointmentId") Long appointmentId) {
         return appointmentService.getAppointment(appointmentId);
     }
 
@@ -35,7 +36,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/{patientId}")
-    public String createAppointmentDetails(@PathVariable ("patientId")String patientId,@RequestBody Appointment appointment) {
+    public String createAppointmentDetails(@PathVariable ("patientId")Long patientId,@RequestBody Appointment appointment) {
         Patient patient = patientService.getPatient(patientId);
         appointment.setPatient(patient);
         appointmentService.createAppointment(appointment);
@@ -43,7 +44,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{appointmentId}")
-    public String updateAppointmentDetails(@PathVariable("appointmentId") String appointmentId, @RequestBody AppointmentUpdateDTO appointmentUpdateDTO) {
+    public String updateAppointmentDetails(@PathVariable("appointmentId") Long appointmentId, @RequestBody AppointmentUpdateDTO appointmentUpdateDTO) {
         Appointment appointment = new Appointment();
         appointment.setAppointmentId(appointmentId);
         appointment.setAppointmentDate(appointmentUpdateDTO.getAppointmentDate());
@@ -58,7 +59,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("{appointmentId}")
-    public String deleteAppointmentDetails(@PathVariable("appointmentId") String appointmentId) {
+    public String deleteAppointmentDetails(@PathVariable("appointmentId") Long appointmentId) {
         appointmentService.deleteAppointment(appointmentId);
         return "Appointment Deleted Successfully!";
     }
