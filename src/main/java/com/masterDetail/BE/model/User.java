@@ -1,7 +1,6 @@
 package com.masterDetail.BE.model;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class User {

@@ -3,6 +3,7 @@ package com.masterDetail.BE.controller;
 import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,9 @@ public class PatientController {
     }
 
     @GetMapping()
-    public List<Patient> getAllPatientDetails() {
-        return patientService.getAllPatients();
+    public Page<Patient> getAllPatientDetails(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                                              @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return patientService.getAllPatients(pageNo, pageSize);
     }
 
     @PostMapping

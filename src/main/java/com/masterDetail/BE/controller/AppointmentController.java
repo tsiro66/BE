@@ -6,8 +6,8 @@ import com.masterDetail.BE.model.Patient;
 import com.masterDetail.BE.service.AppointmentService;
 import com.masterDetail.BE.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -31,8 +31,8 @@ public class AppointmentController {
     }
 
     @GetMapping()
-    public List<Appointment> getAllAppointmentDetails() {
-        return appointmentService.getAllAppointments();
+    public Page<Appointment> getAllAppointmentDetails(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo, @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return appointmentService.getAllAppointments(pageNo, pageSize);
     }
 
     @PostMapping("/{patientId}")
