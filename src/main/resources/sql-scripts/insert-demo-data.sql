@@ -26,4 +26,4 @@ INSERT INTO "appointment" (appointment_id, patient_id, appointment_date, descrip
 ('10', '10', '2024-07-22', 'Psychological counseling session');
 
 -- Insert demo data into user table
-INSERT INTO "user" (username, password) VALUES ('user', '$2a$10$7QJZ2N5qKjD/MZrE5XDAI.vkexGzHBuNcbbwrZ1gE8OXpeJqJDzFu');  -- password is "password"
+INSERT INTO "user" (username, password) VALUES ('user', '$2a$12$cyKrZR/mnY5hL0gVNn.hQe1jeBx7zY.cPChtNBUqJGFD.48zHRZfq');  -- password is "password"
