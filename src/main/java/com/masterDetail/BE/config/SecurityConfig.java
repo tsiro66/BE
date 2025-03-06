@@ -37,7 +37,7 @@ public class SecurityConfig {
 
     public SecurityConfig(RsaKeyProperties rsaKeyProperties, CustomUserDetailsService userDetailsService) {
         this.rsaKeyProperties = rsaKeyProperties;
-        this.userDetailsService = userDetailsService; // Now correctly initialized
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
